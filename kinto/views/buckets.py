@@ -1,5 +1,5 @@
 from cliquet import resource
-from cliquet.events import ResourceChanged
+from cliquet.events import ResourceChanged, ACTIONS
 from pyramid.events import subscriber
 
 from kinto.views import NameGenerator
@@ -29,7 +29,7 @@ class Bucket(resource.ProtectedResource):
 
 @subscriber(ResourceChanged,
             for_resources=('bucket',),
-            for_actions=('delete',))
+            for_actions=(ACTIONS.DELETE,))
 def on_buckets_deleted(event):
     """Some buckets were deleted, delete sub-resources.
     """

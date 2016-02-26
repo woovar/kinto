@@ -1,7 +1,7 @@
 import colander
 
 from cliquet import resource
-from cliquet.events import ResourceChanged
+from cliquet.events import ResourceChanged, ACTIONS
 from pyramid.events import subscriber
 
 from kinto.views import NameGenerator
@@ -31,7 +31,7 @@ class Group(resource.ProtectedResource):
 
 @subscriber(ResourceChanged,
             for_resources=('group',),
-            for_actions=('delete'))
+            for_actions=(ACTIONS.DELETE,))
 def on_groups_deleted(event):
     """Some groups were deleted, remove them from users principals.
     """
@@ -46,7 +46,7 @@ def on_groups_deleted(event):
 
 @subscriber(ResourceChanged,
             for_resources=('group',),
-            for_actions=('create', 'update'))
+            for_actions=(ACTIONS.CREATE, ACTIONS.UPDATE))
 def on_groups_changed(event):
     """Some groups were changed, update users principals.
     """

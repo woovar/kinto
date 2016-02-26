@@ -1,7 +1,7 @@
 import colander
 import jsonschema
 from cliquet import resource
-from cliquet.events import ResourceChanged
+from cliquet.events import ResourceChanged, ACTIONS
 from jsonschema import exceptions as jsonschema_exceptions
 from pyramid.events import subscriber
 
@@ -55,7 +55,7 @@ class Collection(resource.ProtectedResource):
 
 @subscriber(ResourceChanged,
             for_resources=('collection',),
-            for_actions=('delete',))
+            for_actions=(ACTIONS.DELETE,))
 def on_collections_deleted(event):
     """Some collections were deleted, delete records.
     """
