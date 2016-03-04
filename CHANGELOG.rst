@@ -6,6 +6,11 @@ This document describes changes between each past release.
 1.12.0 (unreleased)
 ===================
 
+**Breaking Changes**
+
+- ``kinto start`` must be explicitly run with ``--reload`` in order to
+  restart the server when code or configuration changes (ref #490).
+
 **Internal changes**
 
 - Changed default duration between retries on error (``Retry-After`` header)
