@@ -47,7 +47,7 @@ def main(args=None):
     parser_start = subparsers.add_parser('start')
     parser_start.add_argument('--reload',
                               action='store_true',
-                              help='Reload when code or config changes',
+                              help='Restart when code or config changes',
                               required=False,
                               default=False)
     parser_start.set_defaults(which='start')
